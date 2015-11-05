@@ -1,7 +1,5 @@
 #include "MKL46Z4.h"
 
-#define LED_GREEN_ENABLE 1
-
 void delay(void)
 {
 	int i;
@@ -9,7 +7,6 @@ void delay(void)
 	for (i = 0; i < 1000000; i++);
 }
 
-#if LED_GREEN_ENABLE
 void led_green_init()
 {
 	SIM_COPC = 0;
@@ -23,9 +20,7 @@ void led_green_toggle()
 {
 	GPIOD_PTOR = (1 << 5);
 }
-#endif
 
-#if LED_RED_ENABLE
 void led_red_init()
 {
 	SIM_COPC = 0;
@@ -39,7 +34,6 @@ void led_red_toggle(void)
 {
 	GPIOE_PTOR = (1 << 29);
 }
-#endif
 
 void main(void)
 {

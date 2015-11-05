@@ -5,9 +5,10 @@ STACK_SIZE = DEFINED(__stack_size__) ? __stack_size__ : 0x0400;
 
 MEMORY
 {
-  INTERRUPTS (rx)  : ORIGIN = 0x0,  LENGTH = 0x100         
-  TEXT       (rx)  : ORIGIN = 0x410, LENGTH = 0x3FBF0     
-  RAM        (rwx) : ORIGIN = 0x1FFFE000, LENGTH = 0x8000
+  INTERRUPTS   (rx)  : ORIGIN = 0x00000000, LENGTH = 0x00000100
+  FLASH_CONFIG (rx)  : ORIGIN = 0x00000400, LENGTH = 0x00000010
+  TEXT         (rx)  : ORIGIN = 0x00000410, LENGTH = 0x0003FBF0
+  RAM          (rwx) : ORIGIN = 0x1FFFE000, LENGTH = 0x00008000
 }
 
 /* Section Definitions */
@@ -17,6 +18,15 @@ SECTIONS
     {
         KEEP(*(.isr_vector .isr_vector.*))
     } > INTERRUPTS
+
+    .flash_config :
+    {
+        . = ALIGN(4);
+        LONG(0xFFFFFFFF);
+        LONG(0xFFFFFFFF);
+        LONG(0xFFFFFFFF);
+        LONG(0xFFFFFFFE);
+    } > FLASH_CONFIG
 
     .text :
     {
