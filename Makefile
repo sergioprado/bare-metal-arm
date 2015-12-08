@@ -23,7 +23,7 @@ srec: $(TARGET).srec
 bin: $(TARGET).bin
 
 clean:
-	$(RM) $(TARGET).srec $(TARGET).elf $(target).bin $(target).map $(OBJ)
+	$(RM) $(TARGET).srec $(TARGET).elf $(TARGET).bin $(TARGET).map $(OBJ)
 
 %.o: %.c
 	$(CC) -c $(ARCHFLAGS) $(CFLAGS) -o $@ $<
