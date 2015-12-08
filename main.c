@@ -2,7 +2,7 @@
 
 void delay(void)
 {
-	int i;
+	volatile int i;
 
 	for (i = 0; i < 1000000; i++);
 }
@@ -35,7 +35,7 @@ void led_red_toggle(void)
 	GPIOE_PTOR = (1 << 29);
 }
 
-void main(void)
+int main(void)
 {
 	led_green_init();
 
@@ -43,5 +43,7 @@ void main(void)
 		led_green_toggle();
 		delay();
 	}
+
+	return 0;
 }
 
